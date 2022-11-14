@@ -1,2 +1,1 @@
-Esse vai ser nosso repositorio para o codigo de dama, cria uma branch sua primeiro
-e depois disso a gnt vai passando da sua branch para a staging, (rafael) 
+essa vai ser a branch staging, onde vamos colocar os codigos para serem testados em conjunto antes de ser mandado para main (rafael) 
