@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<conio.h>
 #include<string.h>
-#include<windows.h>
 #include<time.h>
+#include<conio.h>
+#include<windows.h>
+
+
 
 void display(char tabuleiro[8][8])
 {
@@ -79,7 +81,7 @@ int main()
         goto intro;
     }
     printf("\a");
-    printf("\n E Hora do Duelo");
+    printf("\n A partida ira comecar agora!");
     char tick=A;
     char TICK=B;
     tabuleiro[0][0]=B;tabuleiro[0][2]=B;tabuleiro[0][4]=B;tabuleiro[0][6]=B;
@@ -481,19 +483,19 @@ int main()
                 sleep(1);
                 goto again;
             }
-            if(board[y + 1][x - 1]==B)
+            if(tabuleiro[y + 1][x - 1]==B)
             {
                 yolo++;
                 sleep(1);
                 goto again;
             }
-            if(board[y + 1][x - 1]==' ')
+            if(tabuleiro[y + 1][x - 1]==' ')
             {
-                board[y][x]=' ';
-                board[++y][--x]=B;
-                goto done2;
+                tabuleiro[y][x]=' ';
+                tabuleiro[++y][--x]=B;
+                goto feito2;
             }
-            if(board[y + 1][x - 1]==A)
+            if(tabuleiro[y + 1][x - 1]==A)
             {
                 if(x>=1)
                 {
@@ -501,7 +503,7 @@ int main()
                     sleep(1);
                     goto again;
                 }
-                if(board[y + 2][x - 2]!=' ')
+                if(tabuleiro[y + 2][x - 2]!=' ')
                 {
                     yolo++;
                     sleep(1);
@@ -509,11 +511,11 @@ int main()
                 }
                 else
                 {
-                    board[y][x]=' ';
-                    board[y + 1][x - 1]=' ';
+                    tabuleiro[y][x]=' ';
+                    tabuleiro[y + 1][x - 1]=' ';
                     y+=2;x-=2;
-                    board[y][x]=B;
-                    goto done2;
+                    tabuleiro[y][x]=B;
+                    goto feito2;
                 }
             }
         }
@@ -525,19 +527,19 @@ int main()
                 sleep(1);
                 goto again;
             }
-            if(board[y + 1][x + 1]==B)
+            if(tabuleiro[y + 1][x + 1]==B)
             {
                 yolo++;
                 sleep(1);
                 goto again;
             }
-            if(board[y + 1][x + 1]==' ')
+            if(tabuleiro[y + 1][x + 1]==' ')
             {
-                board[y][x]=' ';
-                board[++y][++x]=B;
+                tabuleiro[y][x]=' ';
+                tabuleiro[++y][++x]=B;
                 goto done2;
             }
-            if(board[y + 1][x + 1]==A)
+            if(tabuleiro[y + 1][x + 1]==A)
             {
                 if(x>=6)
                 {
@@ -545,7 +547,7 @@ int main()
                     sleep(1);
                     goto again;
                 }
-                if(board[y + 2][x + 2]!=' ')
+                if(tabuleiro[y + 2][x + 2]!=' ')
                 {
                     yolo++;
                     sleep(1);
@@ -553,26 +555,26 @@ int main()
                 }
                 else
                 {
-                    board[y][x]=' ';
-                    board[y + 1][x + 1]=' ';
+                    tabuleiro[y][x]=' ';
+                    tabuleiro[y + 1][x + 1]=' ';
                     y+=2;x+=2;
-                    board[y][x]=B;
-                    goto done2;
+                    tabuleiro[y][x]=B;
+                    goto feito2;
                 }
             }
         }
-    done2:
-        display(board);
+    feito2:
+        display(feito2);
 
         pla=0;
-        opp=0;
+        opo=0;
         A=tick;
         B=TICK;
         for(i=0;i<8;i++)
         {
             for(j=0;j<8;j++)
             {
-                if(board[i][j]==A)
+                if(tabuleiro[i][j]==A)
                     pla+=5;
             }
         }
@@ -580,110 +582,101 @@ int main()
         {
             for(j=0;j<8;j++)
             {
-                if(board[i][j]==B)
+                if(tabuleiro[i][j]==B)
                     opp+=5;
             }
         }
-        /*this too displays the scores after each move.The only difference is this block is for player-2's move,
-        while which we saw above is for player-1's move*/
         printf("\n\t\t\t\tCurrent scores:");
-        printf("\n\t\t\t\t%s = %d",name1,pla);
-        printf("\n\t\t\t\t%s = %d",name2,opp);
-        if(pla==0 || opp==0)
-            //if score of player-1 or player-2 is 0,the compiler goes to the end part,or else it goes to start part
+        printf("\n\t\t\t\t%s = %d",jogador1,pla);
+        printf("\n\t\t\t\t%s = %d",jogador2,opo);
+        if(pla==0 || opo==0)
+
             goto end;
         else
             goto start;
     end:
         setclr(40);
-        if(pla>opp)
+        if(pla>opo)
         {
             sleep(1);
             printf("\n\n");
-            //displays the final score of each player and displays who won the game.This block is for player-1,if he/she wins..
-            printf("\n%s's score:%d",name1,pla);
-            printf("\n%s's score:%d",name2,opp);
-            printf("\n%s won the game.....",name1);
+            printf("\n%s's score:%d",jogador1,pla);
+            printf("\n%s's score:%d",jogador2,opo);
+            printf("\n%s Ganhou o jogo",jogador1);
             sleep(1);
-
-            //system("cls") clears the screen
             system("cls");
-            if(pla>highscr)
+            if(pla>pontuacao)
             {
                 sleep(1);
-                highscr=pla;
-                strcpy(nhigh,name1);
+                pontuacao=pla;
+                strcpy(nhigh,jogador1);
                 setclr(34);
-
-                //if player-1 wins the high score screen is displayed
-                printf("\nNEW HIGH SCORE!!!!");
-                f=fopen("F:\\highscore.txt","w");
-                fprintf(f,"\n %s = %d",nhigh,highscr);
+                printf("\n Novo recorde");
+                f=fopen("F:\\pontuacao.txt","w");
+                fprintf(f,"\n %s = %d",nhigh,pontuacao);
                 fclose(f);
-                printf("\nHighest score:\n%s = %d",nhigh,highscr);
+                printf("\n Maior pontuacao:\n%s = %d",nhigh,pontuacao);
             }
         }
-        if(pla<opp)
+        if(pla<opo)
         {
             sleep(1);
             printf("\n\n");
-            //this displays the score and shows who won the game.This blocks gets executed when player-2 wins.
-            printf("\n%s's score:%d",name1,pla);
-            printf("\n%s's score:%d",name2,opp);
-            printf("\n%s won the game....",name2);
+            printf("\n%s's pontos:%d",jogador1,pla);
+            printf("\n%s's pontos:%d",jogador2,opo);
+            printf("\n%s Ganhou a partida",jogador2);
             sleep(1);
 
             system("cls");
-            if(opp>highscr)
+            if(opp>pontuacao)
             {
                 sleep(1);
-                highscr=opp;
-                strcpy(nhigh,name2);
+                pontuacao=opo;
+                strcpy(nhigh,jogador2);
                 setclr(34);
 
-                //if player-2 wins,the high score screen is displayed
-                printf("\nNEW HIGH SCORE!!!");
-                f=fopen("F:\\highscore.txt","w");
-                fprintf(f,"\n %s = %d",nhigh,highscr);
+                printf("\nNovo Recorde");
+                f=fopen("F:\\pontuacao.txt","w");
+                fprintf(f,"\n %s = %d",nhigh,pontuacao);
                 fclose(f);
-                printf("\nHighest score:\n%s = %d",nhigh,highscr);
+                printf("\nMaior pontuacao:\n%s = %d",nhigh,pontuacao);
             }
         }
-        if(pla==opp)
+        if(pla==opo)
         {
             sleep(1);
             printf("\n\n");
-            printf("\n%s's score:%d",name1,pla);
-            printf("\n%s's score:%d",name2,opp);
-            printf("\nIt's a draw!!!!");
+            printf("\n%s's pontos:%d",jogador1,pla);
+            printf("\n%s's pontos:%d",jogador2,opo);
+            printf("\nEmapate!");
             sleep(1);
 
             system("cls");
-            if(pla>highscr)
+            if(pla>pontuacao)
             {
                 sleep(1);
-                highscr=pla;
-                strcpy(nhigh,name1);
+                pontuacao=pla;
+                strcpy(nhigh,jogador1);
                 setclr(34);
 
 
-                f=fopen("F:\\highscore.txt","w");
-                fprintf(f,"\n %s = %d",nhigh,highscr);
+                f=fopen("F:\\pontuacao.txt","w");
+                fprintf(f,"\n %s = %d",nhigh,pontuacao);
                 fclose(f);
-                printf("\nHighest score:\n%s = %d",nhigh,highscr);
+                printf("\nRecorde:\n%s = %d",nhigh,pontuacao);
             }
-            if(opp>highscr)
+            if(opo>pontuacao)
             {
                 sleep(1);
-                highscr=opp;
-                strcpy(nhigh,name2);
+                pontuacao=opo;
+                strcpy(nhigh,jogador2);
                 setclr(34);
 
 
-                f=fopen("F:\\highscore.txt","w");
-                fprintf(f,"\n %s = %d",nhigh,highscr);
+                f=fopen("F:\\pontuacao.txt","w");
+                fprintf(f,"\n %s = %d",nhigh,pontuacao);
                 fclose(f);
-                printf("\nHighest score:\n%s = %d",nhigh,highscr);
+                printf("\nRecorde:\n%s = %d",nhigh,pontuacao);
             }
         }
 
