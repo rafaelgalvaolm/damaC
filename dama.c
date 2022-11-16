@@ -253,24 +253,24 @@ int main()
             tabuleiro[++y][--x]=A;
             goto feito1;
         }
-        if(board[y + 1][x - 1]==B)
+        if(tabuleiro[y + 1][x - 1]==B)
         {
             if(x<=1)
             {
                 printf("jogada invalida, peca obstruindo");
                 goto start;
             }
-            if(board[y + 2][x - 2]!=' ')
+            if(tabuleiro[y + 2][x - 2]!=' ')
             {
                 printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             else
             {
-                board[y][x]=' ';
-                board[y + 1][x - 1]=' ';
+                tabuleiro[y][x]=' ';
+                tabuleiro[y + 1][x - 1]=' ';
                 y+=2;x-=2;
-                board[y][x]=A;
+                tabuleiro[y][x]=A;
                 goto feito1;
             }
         }
