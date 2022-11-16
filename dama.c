@@ -310,7 +310,7 @@ int main()
                 tabuleiro[y][x]=' ';
                 tabuleiro[y + 1][x + 1]=' ';
                 y+=2;x+=2;
-                board[y][x]=A;
+                tabuleiro[y][x]=A;
                 goto feito1;
             }
         }
@@ -439,19 +439,19 @@ int main()
                 sleep(1);
                 goto again;
             }
-            if(board[y - 1][x + 1]==B)
+            if(tabuleiro[y - 1][x + 1]==B)
             {
                 yolo++;
                 sleep(1);
                 goto again;
             }
-            if(board[y - 1][x + 1]==' ')
+            if(tabuleiro[y - 1][x + 1]==' ')
             {
-                board[y][x]=' ';
-                board[--y][++x]=B;
-                goto done2;
+                tabuleiro[y][x]=' ';
+                tabuleiro[--y][++x]=B;
+                goto feito2;
             }
-            if(board[y - 1][x + 1]==A)
+            if(tabuleiro[y - 1][x + 1]==A)
             {
                 if(x>=6)
                 {
@@ -459,7 +459,7 @@ int main()
                     sleep(1);
                     goto again;
                 }
-                if(board[y - 2][x + 2]!=' ')
+                if(tabuleiro[y - 2][x + 2]!=' ')
                 {
                     yolo++;
                     sleep(1);
@@ -467,11 +467,11 @@ int main()
                 }
                 else
                 {
-                    board[y][x]=' ';
-                    board[y - 1][x + 1]=' ';
+                    tabuleiro[y][x]=' ';
+                    tabuleiro[y - 1][x + 1]=' ';
                     y-=2;x+=2;
-                    board[y][x]=B;
-                    goto done2;
+                    tabuleiro[y][x]=B;
+                    goto feito2;
                 }
             }
         }
