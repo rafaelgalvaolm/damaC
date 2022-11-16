@@ -40,7 +40,6 @@ int main()
     }
 
     fprintf(f,"\n %s = %d",nhigh,pontuacao);
-    //to close the file
     fclose(f);
     printf("\n\t\t\t\t\t-----------------------------------");
 
@@ -148,51 +147,49 @@ int main()
         goto start;
     }
     printf("\a");
-    printf("Which direction?\n1-upper left diagonal\n2-upper right diagonal\n3-lower left diagonal\n4-lower right diagonal\n");
+    printf("Qual direcao?\n1-diagonal superior esquerda\n2-diagonal superior direita\n3-diagonal inferior esquerda\n4-diagonal inferior direita\n");
     scanf(" %d",&dir);
     A=tick;
     B=TICK;
     setclr(39);
 
-    //direction=1 indicates the upper left diagonal
     if(dir == 1)
     {
         if(x==0 || y==0)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y-1][x-1]==A)
+        if(tabuleiro[y-1][x-1]==A)
         {
-            printf("move invlaid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y - 1][x - 1]==' ')
+        if(tabuleiro[y - 1][x - 1]==' ')
         {
-            board[y][x]=' ';
-            board[--y][--x]=A;
-            goto done1;
+            tabuleiro[y][x]=' ';
+            tabuleiro[--y][--x]=A;
+            goto feito1;
         }
-        //if the jumping position contains our opponent,the following if block takes place
-        if(board[y - 1][x - 1]==B)
+        if(tabuleiro[y - 1][x - 1]==B)
         {
             if(x<=1)
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
-            if(board[y - 2][x - 2]!=' ')
+            if(tabuleiro[y - 2][x - 2]!=' ')
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             else
             {
-                board[y][x]=' ';
-                board[y - 1][x - 1]=' ';
+                tabuleiro[y][x]=' ';
+                tabuleiro[y - 1][x - 1]=' ';
                 y-=2;x-=2;
-                board[y][x]=A;
-                goto done1;
+                tabuleiro[y][x]=A;
+                goto feito1;
             }
         }
     }
@@ -200,39 +197,39 @@ int main()
     {
         if(x==7 || y==0)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y - 1][x + 1]==A)
+        if(tabuleiro[y - 1][x + 1]==A)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y - 1][x + 1]==' ')
+        if(tabuleiro[y - 1][x + 1]==' ')
         {
-            board[y][x]=' ';
-            board[--y][++x]=A;
-            goto done1;
+            tabuleiro[y][x]=' ';
+            tabuleiro[--y][++x]=A;
+            goto feito1;
         }
-        if(board[y - 1][x + 1]==B)
+        if(tabuleiro[y - 1][x + 1]==B)
         {
             if(x>=6)
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             if(board[y - 2][x + 2]!=' ')
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             else
             {
-                board[y][x]=' ';
-                board[y - 1][x + 1]=' ';
+                tabuleiro[y][x]=' ';
+                tabuleiro[y - 1][x + 1]=' ';
                 y-=2;x+=2;
-                board[y][x]=A;
-                goto done1;
+                tabuleiro[y][x]=A;
+                goto feito1;
             }
         }
     }
@@ -240,30 +237,30 @@ int main()
     {
         if(x==0 || y==7)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y + 1][x - 1]==A)
+        if(tabuleiro[y + 1][x - 1]==A)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y + 1][x - 1]==' ')
+        if(tabuleiro[y + 1][x - 1]==' ')
         {
-            board[y][x]=' ';
-            board[++y][--x]=A;
+            tabuleiro[y][x]=' ';
+            tabuleiro[++y][--x]=A;
             goto feito1;
         }
         if(board[y + 1][x - 1]==B)
         {
             if(x<=1)
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             if(board[y + 2][x - 2]!=' ')
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             else
@@ -280,36 +277,36 @@ int main()
     {
         if(x==7 || y==7)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y + 1][x + 1]==A)
+        if(tabuleiro[y + 1][x + 1]==A)
         {
-            printf("move invalid!");
+            printf("jogada invalida");
             goto start;
         }
-        if(board[y + 1][x + 1]==' ')
+        if(tabuleiro[y + 1][x + 1]==' ')
         {
-            board[y][x]=' ';
-            board[++y][++x]=A;
+            tabuleiro[y][x]=' ';
+            tabuleiro[++y][++x]=A;
             goto feito1;
         }
-        if(board[y + 1][x + 1]==B)
+        if(tabuleiro[y + 1][x + 1]==B)
         {
             if(x>=6)
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             if(board[y + 2][x + 2]!=' ')
             {
-                printf("move invalid!");
+                printf("jogada invalida, peca obstruindo");
                 goto start;
             }
             else
             {
-                board[y][x]=' ';
-                board[y + 1][x + 1]=' ';
+                tabuleiro[y][x]=' ';
+                tabuleiro[y + 1][x + 1]=' ';
                 y+=2;x+=2;
                 board[y][x]=A;
                 goto feito1;
@@ -317,40 +314,40 @@ int main()
         }
     }
     feito1:
-        display(board);
-        pla=0;opp=0;
+        display(tabuleiro);
+        pla=0;opo=0;
         A=tick;
         B=TICK;
         for(i=0;i<8;i++)
         {
             for(j=0;j<8;j++)
             {
-                if(board[i][j]==A)
-                    pla+=5;//score of player-1
+                if(tabuleiro[i][j]==A)
+                    pla+=5;
             }
         }
         for(i=0;i<8;i++)
         {
             for(j=0;j<8;j++)
             {
-                if(board[i][j]==B)
-                    opp+=5;//score of player-2
+                if(tabuleiro[i][j]==B)
+                    opo+=5;
             }
         }
-        //displays the scores of the players after each moves
+
         printf("\n\t\t\t\t Pontuacao Atual:");
-        printf("\n\t\t\t\t%s = %d",name1,pla);
-        printf("\n\t\t\t\t%s = %d",name2,opp);
-        if(pla==0 || opp==0)
+        printf("\n\t\t\t\t%s = %d",jogador1,pla);
+        printf("\n\t\t\t\t%s = %d",jogador2,opo);
+        if(pla==0 || opo==0)
             goto end;
     printf("\n");
     setclr(34);
-    printf("player-2's (%c) turn...",B);
+    printf("turno do jogador2 (%c)",B);
     again:
-        if(limit==15)
+        if(limite==15)
         {
-            printf("\nplayer-2 got confused:-P");
-            limit=0;
+            printf("\n O jogador2 esta em narnia");
+            limite=0;
             goto start;
         }
         if(yolo==15)
@@ -359,7 +356,7 @@ int main()
             {
                 for(j=0;j<8;j++)
                 {
-                    if(board[i][j]==B);
+                    if(tabuleiro[i][j]==B);
                     {
                         y=i;
                         x=j;
@@ -367,23 +364,23 @@ int main()
                 }
             }
             yolo=0;
-            limit++;
+            limite++;
         }
         else
         {
             y = rand()%8;
             x = rand()%8;
         }
-        if(board[y][x]!=B)
+        if(tabuleiro[y][x]!=B)
             goto again;
             dir=(rand()%4)+1;
-        if(board[y - 1][x - 1]==A && x>1 && y>1)
+        if(tabuleiro[y - 1][x - 1]==A && x>1 && y>1)
             dir=1;
-        if(board[y - 1][x + 1]==A && x<6 && y>1)
+        if(tabuleiro[y - 1][x + 1]==A && x<6 && y>1)
             dir=2;
-        if(board[y + 1][x - 1]==A && x>1 && y<6)
+        if tabuleiro[y + 1][x - 1]==A && x>1 && y<6)
             dir=3;
-        if(board[y + 1][x + 1]==A && x<6 && y<6)
+        if(tabuleiro[y + 1][x + 1]==A && x<6 && y<6)
             dir=4;
         A=tick;
         B=TICK;
@@ -396,19 +393,19 @@ int main()
                 sleep(1);
                 goto again;
             }
-            if(board[y - 1][x - 1]==B)
+            if(tabuleiro[y - 1][x - 1]==B)
             {
                 yolo++;
                 sleep(1);
                 goto again;
             }
-            if(board[y - 1][x - 1]==' ')
+            if(tabuleiro[y - 1][x - 1]==' ')
             {
-                board[y][x]=' ';
-                board[--y][--x]=B;
-                goto done2;
+                tabuleiro[y][x]=' ';
+                tabuleiro[--y][--x]=B;
+                goto feito2;
             }
-            if(board[y - 1][x - 1]==A)
+            if(tabuleiro[y - 1][x - 1]==A)
             {
                 if(x>=1)
                 {
@@ -416,7 +413,7 @@ int main()
                     sleep(1);
                     goto again;
                 }
-                if(board[y - 2][x - 2]!=' ')
+                if(tabuleiro[y - 2][x - 2]!=' ')
                 {
                     yolo++;
                     sleep(1);
@@ -424,11 +421,11 @@ int main()
                 }
                 else
                 {
-                    board[y][x]=' ';
-                    board[y - 1][x - 1]=' ';
+                    tabuleiro[y][x]=' ';
+                    tabuleiro[y - 1][x - 1]=' ';
                     y-=2;x-=2;
-                    board[y][x]=B;
-                    goto done2;
+                    tabuleiro[y][x]=B;
+                    goto feito2;
                 }
             }
         }
